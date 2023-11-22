@@ -1,6 +1,8 @@
 # Streamlit Folium and FastAPI - Active Fires (with FIRMS and Nominatim APIs)
 
-A web-app map designed to display "Active Fires" spots detected in the last 9 days for a given country. FIRMS API was used to query active fires data from the [FIRMS - Fire Information for Resource Management System](https://firms.modaps.eosdis.nasa.gov/) program from NASA, and Nominatim API was used to query the boundary of a selected country.
+A web-app map designed to display "Active Fires" points detected in the last 9 days for a given country. 
+
+FIRMS API was used to query active fires data from the [FIRMS - Fire Information for Resource Management System](https://firms.modaps.eosdis.nasa.gov/) program from NASA, and Nominatim API was used to query the boundary of a selected country.
 
 ![demo](src/img/demo.gif)
 
