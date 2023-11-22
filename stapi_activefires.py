@@ -21,39 +21,19 @@ def grabbing_firms_world_data(response_firms_urls: tuple, inputed_key: str):
     """
     Function to get the world FIRMS data and keep it in cache to save transactions usage
     """
-    try:
-        # # Check account status
-        # account_status = get_account_status(inputed_key)
-        # st.write("Current status of the FIRMS API usage")
-        # st.dataframe(account_status.astype(str))
 
-        # Start counting transactions
-        start_count = get_current_transaction_count(inputed_key)
-        firms_world_gdf = convert_firms_urls_to_combined_gdf(response_firms_urls)
-        end_count = get_current_transaction_count(inputed_key)
+    # Start counting transactions
+    start_count = get_current_transaction_count(inputed_key)
+    firms_world_gdf = convert_firms_urls_to_combined_gdf(response_firms_urls)
+    end_count = get_current_transaction_count(inputed_key)
 
-        st.write("**%i** transactions were used" % (end_count - start_count))
+    st.write("**%i** transactions were used" % (end_count - start_count))
 
-        return firms_world_gdf
-
-    except requests.HTTPError as e:
-        if e.response.status_code == 403:
-            st.error(
-                "HTTP Error 403: The access limit of your FIRMS key is reached. "
-                + "Try again in 10 minutes or use a different key")
-        else:
-            st.error(f"HTTP error occurred: {e}")
-        raise
-    except Exception as e:
-        st.error(f"Error in grabbing FIRMS world data: {e}")
-        raise
+    return firms_world_gdf
 
 
 def set_state(i, country_code=None):
     st.session_state.stage = i
-    # st.session_state.last_inputed_key = str()
-    # st.session_state.inputed_key = str()
-    # st.session_state.firms_world_gdf = None
 
 
 # @st.cache
@@ -65,11 +45,11 @@ def firms_points_in_queried_aoi_map():
     if st.session_state.stage >= 0:
 
         st.write(
-            "Get a FIRMS Map Key from the bottom of this page: https://firms.modaps.eosdis.nasa.gov/api/area/"
+            f"Get a FIRMS Map Key from this page: **https://firms.modaps.eosdis.nasa.gov/api/area/**"
         )
 
         inputed_key = st.text_input(
-            "Please enter your FIRMS Map Key in the text box below",
+            f"Please enter your **FIRMS Map Key** in the text box below",
             on_change=set_state, args=[1]
         )
         st.session_state.inputed_key = inputed_key  # Store the inputed key in the session state
@@ -110,7 +90,7 @@ def firms_points_in_queried_aoi_map():
     if st.session_state.stage >= 2:
 
         st.write(
-            "From this list of OSM country codes: https://wiki.openstreetmap.org/wiki/Nominatim/Country_Codes"
+            f"From this list of **OSM country codes**: **https://wiki.openstreetmap.org/wiki/Nominatim/Country_Codes**"
         )
         entered_country_code = st.selectbox(
             "Select the country code that you want to display FIRMS data",
@@ -150,7 +130,7 @@ def firms_points_in_queried_aoi_map():
 
                 display_firms_points_within_country_boundary(filtered_firms_gdf, country_gdf, country_center)
 
-                st.text("Awesome!! Select another Country Code to try again!!!")
+                st.text("Awesome!! Select **another Country Code** to try again!!!")
 
                 st.button("Try Again With A New Map Key?", on_click=set_state, args=[0])
 

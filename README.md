@@ -4,7 +4,9 @@ A web-app map designed to display "Active Fires" points detected in the last 9 d
 
 FIRMS API was used to query active fires data from the [FIRMS - Fire Information for Resource Management System](https://firms.modaps.eosdis.nasa.gov/) program from NASA, and Nominatim API was used to query the boundary of a selected country.
 
-![demo](src/img/demo.gif)
+* Keep in mind that every query costs 972 transactions, therefore you can only query every 10' with one API Map Key. But the data is cached per query, so you can just change the country code to display between different countries
+
+![demo](src/demo.gif)
 
 This project is a combination of the two previous Streamlit-FastAPI projects which were created to demonstrate how to use the [FIRMS API](https://github.com/enguy-hub/streamlit_fastapi_firms) and the [Nominatim API](https://github.com/enguy-hub/streamlit_fastapi_nominatim)
 
@@ -79,7 +81,7 @@ Navigate to the following URL: <https://firms.modaps.eosdis.nasa.gov/api/area/>
 
 Scroll down to the bottom of the page and click on "Get MAP KEY" --> Enter your email to get the Map Key
 
-![firms_map_key](src/img/firms_map_key.png)
+![firms_map_key](src/firms_map_key.png)
 
 
 ### 4. Run the FastAPI server

@@ -15,7 +15,16 @@ from models.firms_nominatim_models import nominatim_country_codes
 FIRMS_API_URL = "https://firms.modaps.eosdis.nasa.gov"
 
 
-def get_account_status(map_key: str):  # = FIRMS_MAP_KEY
+def get_account_status(map_key: str) -> pd.DataFrame:  # = FIRMS_MAP_KEY
+
+    # Check if the key is provided and not empty
+    if not map_key:
+        raise ValueError("FIRMS key is required and cannot be empty.")
+
+    # Check if the key is a valid hexadecimal string and has a standard length (e.g., 32 characters)
+    if not all(c in "0123456789abcdef" for c in map_key.lower()) or len(map_key) != 32:
+        raise ValueError("Invalid FIRMS key. Key should be a 32-character hexadecimal string.")
+
     status_url = f"{FIRMS_API_URL}/mapserver/mapkey_status/?MAP_KEY={map_key}"
 
     try:
@@ -27,7 +36,16 @@ def get_account_status(map_key: str):  # = FIRMS_MAP_KEY
     return df
 
 
-def get_current_transaction_count(map_key: str):  # = FIRMS_MAP_KEY
+def get_current_transaction_count(map_key: str) -> pd.DataFrame:  # = FIRMS_MAP_KEY
+    
+    # Check if the key is provided and not empty
+    if not map_key:
+        raise ValueError("FIRMS key is required and cannot be empty.")
+
+    # Check if the key is a valid hexadecimal string and has a standard length (e.g., 32 characters)
+    if not all(c in "0123456789abcdef" for c in map_key.lower()) or len(map_key) != 32:
+        raise ValueError("Invalid FIRMS key. Key should be a 32-character hexadecimal string.")
+
     status_url = f"{FIRMS_API_URL}/mapserver/mapkey_status/?MAP_KEY={map_key}"
     count = 0
 
@@ -70,9 +88,12 @@ def read_firm_csv(
         content = fetch_firms_csv_content(url)
         return process_csv_data(content)
 
-    except Exception as e:
-        logging.error(f"Error reading and processing CSV from URL '{url}': {e}")
-        raise ValueError(f"Failed to read and process CSV from '{url}'") from e
+    except Exception:
+        logging.info("The access limit of your FIRMS key is reached. "
+                + "Try again in 10 minutes or use a different key")
+        # logging.error(f"Error reading and processing CSV from URL '{url}': {e}")
+        raise ValueError("The access limit of your FIRMS key is reached. "
+                        + "Try again in 10 minutes or use a different key")
 
 
 def fetch_firms_csv_content(url: str) -> StringIO:
