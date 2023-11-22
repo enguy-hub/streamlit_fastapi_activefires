@@ -1,4 +1,4 @@
-name: stapi
+name: stfapi
 channels:
   - defaults
 dependencies:
