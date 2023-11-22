@@ -4,7 +4,7 @@ A web-app map designed to display "Active Fires" points detected in the last 9 d
 
 FIRMS API was used to query active fires data from the [FIRMS - Fire Information for Resource Management System](https://firms.modaps.eosdis.nasa.gov/) program from NASA, and Nominatim API was used to query the boundary of a selected country.
 
-* Keep in mind that every query costs 972 transactions, therefore you can only query every 10' with one API Map Key. But the data is cached per query, so you can just change the country code to display between different countries
+* Keep in mind that every query costs **972 transactions**, therefore you can **only query every 10' with one API Map Key**. But the data is cached per query, so you can just **change the country code** to display FIRMS active fire points between different countries
 
 ![demo](src/demo.gif)
 
