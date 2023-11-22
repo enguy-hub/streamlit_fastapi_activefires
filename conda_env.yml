@@ -1,0 +1,8 @@
+name: stapi
+channels:
+  - defaults
+dependencies:
+  - python=3.10.13
+  - pip=23.3
+  - pip:
+    - -r requirements.txt

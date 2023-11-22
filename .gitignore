@@ -1,0 +1,42 @@
+# Created by .ignore support plugin (hsz.mobi)
+### Example user template template
+### Example user template
+
+# IntelliJ project files
+.idea
+.idea/vcs.xml
+.idea/workspace.xml
+.idea/modules.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/csv-plugin.xml
+__pycache__/
+*.iml
+out
+gen
+
+# VSCode project files
+.vscode/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# Local History for Visual Studio Code
+.history/
+
+# Built Visual Studio Code Extensions
+*.vsix
+
+# Jupyter-lab files
+Notebooks
+.ipynb_checkpoints
+
+# Ruff files
+.ruff_cache/
+
+# Others
+backup/
+*.qgz
